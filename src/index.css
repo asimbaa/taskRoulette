@@ -1,0 +1,93 @@
+.roulette-wheel {
+  @apply relative w-[400px] h-[400px] rounded-full border-8 border-blue-600 
+         bg-gradient-to-br from-blue-500 to-purple-600 transition-all duration-1000
+         shadow-2xl;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.roulette-wheel::before {
+  content: '';
+  @apply absolute inset-0 rounded-full;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.wheel-pointer {
+  @apply absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2;
+  width: 20px;
+  height: 40px;
+  background: linear-gradient(90deg, #dc2626 0%, #991b1b 100%);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  z-index: 10;
+}
+
+.wheel-stand {
+  @apply absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2;
+  width: 120px;
+  height: 60px;
+  background: linear-gradient(180deg, #1e40af 0%, #1e3a8a 100%);
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.wheel-container {
+  @apply relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.wheel-tilt {
+  transform: rotateX(20deg);
+  transform-style: preserve-3d;
+}
+
+.wheel-shadow {
+  @apply absolute inset-0 rounded-full;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  transform: translateZ(-10px);
+}
+
+/* Add these base styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .task-card {
+    @apply bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg;
+  }
+
+  .input {
+    @apply w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600
+           bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+           focus:ring-2 focus:ring-blue-500 focus:border-transparent
+           outline-none transition-all duration-200;
+  }
+
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-blue-500 to-purple-600 text-white
+           hover:from-blue-600 hover:to-purple-700
+           focus:ring-blue-500;
+  }
+}
+
+/* Additional utility classes */
+.glass-effect {
+  @apply backdrop-blur-lg bg-white/30 dark:bg-gray-800/30;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600;
+}

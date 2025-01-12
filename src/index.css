@@ -1,3 +1,56 @@
+/* Base styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .input {
+    @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-600 
+           rounded-lg bg-white dark:bg-gray-800 
+           text-gray-900 dark:text-gray-100
+           focus:ring-2 focus:ring-blue-500 focus:border-transparent
+           transition-colors duration-200;
+  }
+
+  .btn {
+    @apply px-4 py-2 rounded-lg font-semibold
+           transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-blue-500 to-purple-600
+           text-white shadow-lg
+           hover:shadow-xl hover:scale-105
+           active:scale-95;
+  }
+
+  .task-card {
+    @apply bg-white dark:bg-gray-800 
+           rounded-xl p-4 shadow-lg
+           border border-gray-200 dark:border-gray-700
+           transition-all duration-200;
+  }
+}
+
+/* Wheel specific styles */
+.wheel-container {
+  @apply relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.wheel-tilt {
+  transform: rotateX(20deg);
+  transform-style: preserve-3d;
+}
+
+.wheel-shadow {
+  @apply absolute inset-0 rounded-full;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  transform: translateZ(-10px);
+}
+
 .roulette-wheel {
   @apply relative w-[400px] h-[400px] rounded-full border-8 border-blue-600 
          bg-gradient-to-br from-blue-500 to-purple-600 transition-all duration-1000
@@ -35,59 +88,4 @@
   border-radius: 0 0 20px 20px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
               0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-.wheel-container {
-  @apply relative;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-}
-
-.wheel-tilt {
-  transform: rotateX(20deg);
-  transform-style: preserve-3d;
-}
-
-.wheel-shadow {
-  @apply absolute inset-0 rounded-full;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  transform: translateZ(-10px);
-}
-
-/* Add these base styles */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-  .task-card {
-    @apply bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg;
-  }
-
-  .input {
-    @apply w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600
-           bg-white dark:bg-gray-700 text-gray-900 dark:text-white
-           focus:ring-2 focus:ring-blue-500 focus:border-transparent
-           outline-none transition-all duration-200;
-  }
-
-  .btn {
-    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200
-           focus:outline-none focus:ring-2 focus:ring-offset-2;
-  }
-
-  .btn-primary {
-    @apply bg-gradient-to-r from-blue-500 to-purple-600 text-white
-           hover:from-blue-600 hover:to-purple-700
-           focus:ring-blue-500;
-  }
-}
-
-/* Additional utility classes */
-.glass-effect {
-  @apply backdrop-blur-lg bg-white/30 dark:bg-gray-800/30;
-}
-
-.text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600;
 }

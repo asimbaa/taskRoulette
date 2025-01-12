@@ -25,20 +25,20 @@ A modern web application designed to combat decision fatigue and procrastination
 ## Getting Started
 
 1. Clone the repository
-```bash
+\`\`\`bash
 git clone https://github.com/asimbaa/taskRoulette.git
-```
+\`\`\`
 
 2. Install dependencies
-```bash
+\`\`\`bash
 cd taskRoulette
 npm install
-```
+\`\`\`
 
 3. Start the development server
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 ## License
 

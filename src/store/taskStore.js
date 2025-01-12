@@ -13,12 +13,9 @@ export const useTaskStore = create((set) => ({
     tasks: state.tasks.filter(task => task.id !== taskId) 
   })),
   
-  selectRandomTask: () => set((state) => {
-    const availableTasks = state.tasks.filter(task => !task.completed)
-    if (availableTasks.length === 0) return state
-    
-    const randomIndex = Math.floor(Math.random() * availableTasks.length)
-    return { selectedTask: availableTasks[randomIndex] }
+  selectRandomTask: (taskId) => set((state) => {
+    const selectedTask = state.tasks.find(task => task.id === taskId);
+    return { selectedTask };
   }),
   
   completeTask: (taskId) => set((state) => ({

@@ -6,9 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Roulette</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Preload critical assets -->
+    <link rel="preload" as="style" href="/src/index.css">
+    <link rel="preload" as="script" href="/src/main.jsx">
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <!-- Fallback content -->
+    <noscript>
+      <div style="padding: 2rem; text-align: center;">
+        Please enable JavaScript to run this application.
+      </div>
+    </noscript>
   </body>
 </html>

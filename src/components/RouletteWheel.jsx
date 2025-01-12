@@ -50,7 +50,10 @@ function RouletteWheel() {
         ctx.textAlign = 'right';
         ctx.fillStyle = '#fff';
         ctx.font = '16px Inter';
-        ctx.fillText(task.title, wheelRadius - 40, 6);
+        const truncatedTitle = task.title.length > 20 
+          ? task.title.substring(0, 17) + '...'
+          : task.title;
+        ctx.fillText(truncatedTitle, wheelRadius - 40, 6);
         ctx.restore();
       });
       
@@ -101,23 +104,42 @@ function RouletteWheel() {
     
     setIsSpinning(true);
     const wheel = wheelRef.current;
-    const totalRotation = 1800 + Math.random() * 360; // 5 full rotations + random
     
-    gsap.to(wheel, {
-      rotation: `+=${totalRotation}`,
-      duration: 5,
-      ease: "power2.out",
-      transformOrigin: "50% 50%",
+    // Immediately select a random task
+    const randomIndex = Math.floor(Math.random() * tasks.length);
+    const selectedTask = tasks[randomIndex];
+    selectRandomTask(selectedTask.id);
+    
+    // Calculate the target angle based on the selected task
+    const segmentSize = 360 / tasks.length;
+    const targetSegment = randomIndex;
+    const baseRotation = 360 - (targetSegment * segmentSize + segmentSize / 2);
+    const totalRotation = baseRotation + (360 * 15); // Add multiple full rotations
+    
+    // Create timeline for spinning animation
+    const tl = gsap.timeline({
       onComplete: () => {
         setIsSpinning(false);
-        selectRandomTask();
         triggerCelebration();
       }
+    });
+
+    // Ultra-fast initial spin (3 seconds)
+    tl.to(wheel, {
+      rotation: totalRotation * 0.8,
+      duration: 3,
+      ease: "power1.in" // Linear acceleration for constant high speed
+    })
+    // Gradual slowdown (2.5 seconds)
+    .to(wheel, {
+      rotation: totalRotation,
+      duration: 2.5,
+      ease: "power4.out" // Strong deceleration curve
     });
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div className="flex flex-col items-center space-y-8">
       <div className="wheel-container">
         <div className="wheel-tilt">
           <div className="wheel-shadow"></div>
@@ -136,7 +158,9 @@ function RouletteWheel() {
         onClick={handleSpin}
         disabled={isSpinning || tasks.length === 0}
         className={`
-          btn btn-primary
+          btn btn-primary text-lg font-semibold px-8 py-3 rounded-full
+          transform transition-all duration-200
+          hover:scale-105 active:scale-95
           ${isSpinning ? 'opacity-50 cursor-not-allowed' : ''}
           ${tasks.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}
         `}

@@ -14,21 +14,18 @@ export default defineConfig({
         },
       },
     },
-    // Add error and warning handling
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: false, // Keep console logs for debugging
+        drop_console: false,
       },
     },
   },
-  // Add proper error handling
   server: {
     hmr: {
       overlay: true,
     },
   },
-  // Optimize dependencies
   optimizeDeps: {
     include: ['react', 'react-dom', 'framer-motion', 'gsap'],
   },
